@@ -9,11 +9,10 @@ app.use(express.static("public"));
 app.set('view engine', 'ejs');
 
 var connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'root',
-    database: "DBProject",
-    socketPath: '/Applications/MAMP/tmp/mysql/mysql.sock'
+    host: 'db4free.net',
+    user: 'camronvick',
+    password: 'vickcamron',
+    database: "camdbproject",
 });
 
 app.listen(3000, function () {
