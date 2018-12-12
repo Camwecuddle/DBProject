@@ -1,0 +1,44 @@
+.menu_bar {
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    height: 10%;
+    width: 100%;
+  }
+  
+  .button_left{
+    height: 30%;
+    margin-top: 2.5%;
+    margin-left: 2.5%;
+    margin-right: 75.5%;
+  }
+  
+  .button_right{
+    height: 30%;
+    margin-top: 1%;
+    margin-left: 3%;
+  }
+
+  #logo {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 35vh;
+      height: 200px;
+  }
+
+  #manage_drivers {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 100px;
+      width: 200px;
+      height: 60px;
+      font-family: Helvetica, Arial, sans-serif;
+      color: white;
+      background-color: black;
+      font-size: 1.5em;
+      cursor: pointer;
+  }
+  

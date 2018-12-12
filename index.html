@@ -1,0 +1,62 @@
+<html>
+<title>Truck Company</title>
+<link rel="stylesheet" href="index.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<body>
+    <button id="clickety">Get Drivers</button>
+    <h1>Driver:</h1>
+    <div class="row1">
+        <div class="card driver_card">
+            <p class="title">Manager</p>
+            <img id="1" src="Managers/manager_female.svg">
+        </div>
+    </div>
+    <h1>Car:</h1>
+    <div class="row2">
+        <div class="card car_card">
+            <p class="title">Car</p>
+            <img id="1" src="Cars/pilot.svg">
+        </div>
+        <img id="2" src="Cards/car_test_card.svg" hidden>
+        <img id="3" src="Cards/car_test_card.svg" hidden>
+        <img id="4" src="Cards/add_test_card.svg" hidden>
+    </div>
+</body>
+
+<script>
+    function showDrivers(str) {
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("txtHint").innerHTML = this.responseText;
+            }
+        };
+        xmlhttp.open("GET", "getDrivers.php?", true);
+        xmlhttp.send();
+    }
+</script>
+
+<script id="get_from_server">
+    $('#clickety').click(function () {
+        console.log('cam');
+        var jqxhr = $.get("/datums", function () {
+            alert("success");
+        })
+            .done(function (data) {
+                var datum = JSON.parse(data);
+                alert("loaded new data Driver: " + datum[0].DriverName);
+            })
+            .fail(function () {
+                alert("error: selft destruting");
+            })
+    });
+</script>
+
+</html>

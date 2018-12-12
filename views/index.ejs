@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="index.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<head>
+    <meta charset="UTF-8">
+    <title>MY APP</title>
+</head>
+
+<body>
+
+<h1>Driver:</h1>
+    <div class="row1">
+    <% for(var i=0; i<res2.length; i++) {%>
+    <a>
+    <div class="card driver_card">
+        <p class="title"><%=res2[i].DriverName%></p>
+        <img id="1" src="Managers/manager_female.svg">
+        <p class="DID" style="display: none"><%=res2[i].DriverID%></p>
+    </div>
+    </a>
+    <% } %>
+    </div>
+    <h1>Car:</h1>
+    <div id='insert_cars'></div>
+    <form style="display: hidden" action="/datums/add_car" method="POST" id="form">
+        <input type="hidden" id="DriverID" name="DriverID" value=""/>
+    </form>
+
+</body>
+
+<script id="get_from_server">
+
+    $('body').on('click','#add_card',function(){
+        console.log("Cam");
+        $("#form").submit();
+    });
+
+    $('.driver_card').click(function () {
+        $('#insert_cars').empty();
+        var name = $(this).children().first().text();
+        var did = $(this).children().last().text();
+        console.log(name);
+        var encodedName = {name: name};
+        $.post("/datums/cars", encodedName, function () {
+        })
+            .done(function (data) {
+                var datum = JSON.parse(data);
+
+                var html = '<div class="row2">';
+
+                if(!Array.isArray(datum) || !datum.length) {
+                    var a = {};
+                        a.Make = 'No';
+                        a.Model = 'Car';
+                        a.Color = 'purple';
+                        a.DriverID = did;
+                        html += '<div class="card car_card"><p class="title">' + a.Make + ' ' + a.Model + '</p><img id="1" class="' + a.Color +'" src="Cars/pilot.svg"></div>'
+                    }
+
+                datum.forEach(function(a) {
+                    console.log(!a.Make);
+                    html += '<div class="card car_card"><p style="display: none">' + a.CarID + '</p><p class="title">' + a.Make + ' ' + a.Model + '</p><img id="1" class="' + a.Color +'" src="Cars/pilot.svg"><button class="remove_btn" style="display: none">Remove</button></div>'
+                }) 
+                html += '<div id="add_card"><img src="Cards/add_test_card.svg"></div>'; //Trying to render add_car page
+                html += '</div>';
+
+                $('#insert_cars').append(html);
+                $('#DriverID').val(did);
+            })
+            .fail(function () {
+                console.log("error: selft destruting");
+            })
+    });
+</script>
+
+<script>
+
+    $('body').on('click','.car_card',function(){
+        console.log("Cam");
+        console.log($(this).attr("class"));
+        $(this).find("button").css("display", "block");
+    });
+
+    $('body').on('click','.remove_btn',function(){
+        var name = $(this).parent().children().first().text();
+        var saveThis = $(this);
+        var encodedName = {CarID: name};
+        $.post("/datums/remove_car", encodedName, function () {
+        })
+            .done(function (data) {
+                saveThis.parent().remove();
+            })
+
+            .fail(function () {
+                console.log("error: selft destruting");
+            })
+    });
+</script>
+
+</html>

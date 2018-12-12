@@ -1,0 +1,86 @@
+html {
+    font-family: arial, sans-serif;
+}
+
+img {
+    width: 200px;
+    height: 300px;
+    transition-duration: 5s;
+}
+
+.row1 {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-around;
+    height: 300px;
+}
+
+.row2 {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-around;
+    height: 300px;
+}
+
+.card {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 190px;
+    height: 275px;
+    border-style: solid;
+    border-radius: 25px;
+    border-color: black;
+    border-width: 5px;
+    cursor: pointer;
+}
+
+.card p {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-top: 20%;
+}
+
+.driver_card img {
+    width: auto;
+    height: 62%;
+}
+
+.car_card img{
+    width: 80%;
+    height: auto;
+    margin: 0%;
+}
+
+.red {
+    background-color: #d37a7a;
+}
+
+.blue {
+    background-color: #7ba7d8;
+}
+
+.white {
+    background-color: #e5e5e5;
+}
+
+.purple {
+    background-color: #9079b7;
+}
+
+.yellow {
+    background-color: #d4d77c;
+}
+
+.orange {
+    background-color: #d69c7c;
+}
+
+.black {
+    background-color: #181818;
+}
+
+.gray {
+    background-color: #b0b0b0;
+}

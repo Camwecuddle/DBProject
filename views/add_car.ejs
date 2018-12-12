@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>Add Car</title>
+<link rel="stylesheet" href="/../add_car.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<body>
+    <div id="car_selector">
+    <div id="select_model">
+        <button id="left_btn" class="model_btn"><</button>
+        <p class="text" id="car_model">Model: Honda Pilot</p>
+        <button id="right_btn" class="model_btn">></button>
+    </div>
+        <p class="text" id="car_color">Color: blue</p>
+        <img id="car_svg" class="blue" src="../Cars/pilot.svg">
+        <div id="color_options">
+            <div class="color_box yellow"></div>
+            <div class="color_box orange"></div>
+            <div class="color_box red"></div>
+            <div class="color_box purple"></div>
+            <div class="color_box blue"></div>
+            <div class="color_box black"></div>
+            <div class="color_box gray"></div>
+            <div class="color_box white"></div>
+        </div>
+        <button id="add_car">Add Car</button>
+        <!--<a href="/../datums"><button id="add_car">Add Car</button></a>-->
+    </div>
+</body>
+
+<script>
+    $(".color_box").click(function () {
+        var color = this.className.split(/\s+/)[1];
+        $("#car_svg").attr('class', color);
+        $("#car_color").html("Color: " + color);
+    });
+</script>
+
+<script>
+    var cars = ["Model: Honda Pilot", "Model: Honda CRV", "Model: Volvo XC90", "Model: BMW X5", "Model: Toyota Sequoia", "Model: Ford Explorer", "Model: Ford Fusion", "Model: Audi Q5"];
+    var i = 0;
+    $("#left_btn").click(function() {
+        i--;
+        if(i < 0) i = cars.length-1;
+        $("#car_model").empty();
+        $("#car_model").html(cars[i]);
+    });
+
+    $("#right_btn").click(function() {
+        i++;
+        if(i > cars.length-1) i = 0;
+        $("#car_model").empty();
+        $("#car_model").html(cars[i]);
+    });
+</script>
+
+<script id="add_car_to_server">
+//finish this script to put make model and color into DB with right Driver ID
+    $('#add_car').click(function () {
+        var make = $('#car_model').text().split(/\s+/)[1];
+        var model = $('#car_model').text().split(/\s+/)[2];
+        var color = $('#car_svg').attr('class');
+        console.log(make + model + color);
+        var encodedName = {make: make, model: model, color: color, DriverID: "<%=DriverID%>"};
+        console.log(encodedName);
+        $.post("/datums/add_new_car", encodedName, function () {
+        })
+            .done(function (data) {
+                window.location.replace('/datums');
+            })
+            .fail(function () {
+                console.log("error: selft destruting");
+            })
+    });
+</script>
+
+</html>

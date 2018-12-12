@@ -1,0 +1,32 @@
+<html>
+<title>Add Car</title>
+<link rel="stylesheet" href="add_car.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<body>
+    <div id="car_selector">
+        <p class="text" id="car_model">Model: Honda Pilot</p>
+        <p class="text" id="car_color">Color: Red</p>
+        <img id="car_svg" src="Cars/pilot.svg">
+        <div id="color_options">
+            <div class="color_box yellow"></div>
+            <div class="color_box orange"></div>
+            <div class="color_box red"></div>
+            <div class="color_box purple"></div>
+            <div class="color_box blue"></div>
+            <div class="color_box black"></div>
+            <div class="color_box gray"></div>
+            <div class="color_box white"></div>
+        </div>
+    </div>
+</body>
+
+<script>
+    $(".color_box").click(function () {
+        console.log("yeet");
+        var color = $(this).css("background-color");
+        $("#car_svg").css('background-color', color);
+    });
+</script>
+
+</html>
